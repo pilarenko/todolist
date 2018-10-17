@@ -1,5 +1,5 @@
 .todo {
-  margin: 20px auto;
+  margin: 60px auto;
   width: 50%;
   border: 1px solid black;
 }
@@ -10,4 +10,11 @@
 
 .todo__row {
   background-color: #fcfcfc;
+}
+
+
+@media (max-width: 768px) {
+  .todo {
+    width: 90%;
+  }
 }

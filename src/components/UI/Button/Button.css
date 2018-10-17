@@ -3,3 +3,9 @@
   border: 1px solid #ef5b09;
   width: 80%;
 }
+
+@media (max-width: 768px) {
+  .button button {
+    width: 100%;
+  }
+}

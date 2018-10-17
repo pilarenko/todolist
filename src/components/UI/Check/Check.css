@@ -1,3 +1,7 @@
 .check {
-  
+  margin: 0 auto;
+}
+
+.check--active {
+  color: #ef5b09;
 }

@@ -1,0 +1,13 @@
+.actions {
+
+}
+
+.actions__set {
+  display: flex;
+  flex-direction: row;
+}
+
+.actions__set div:hover {
+  color: #ef5b09;
+  cursor: pointer;
+}

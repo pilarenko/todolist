@@ -3,9 +3,9 @@ import './Can.css';
 
 const Can = (props) => {
   return (
-    <span>
+    <div className='can' onClick={props.onClick}>
      <i className="fas fa-trash-alt" />
-    </span>
+    </div>
   )
 }
 

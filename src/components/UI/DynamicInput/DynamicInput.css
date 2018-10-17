@@ -1,3 +1,7 @@
 .dynamicInput {
 
 }
+
+.dynamicInput__checked {
+  text-decoration: line-through;
+}
