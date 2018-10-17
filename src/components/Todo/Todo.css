@@ -1,0 +1,13 @@
+.todo {
+  margin: 20px auto;
+  width: 50%;
+  border: 1px solid black;
+}
+
+.todo__head {
+  background-color: #bcbcbc9c;
+}
+
+.todo__row {
+  background-color: #fcfcfc;
+}

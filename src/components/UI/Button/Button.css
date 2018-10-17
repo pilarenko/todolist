@@ -1,3 +1,5 @@
-.button {
-  
+.button button {
+  background-color: #ef5b09;
+  border: 1px solid #ef5b09;
+  width: 80%;
 }
