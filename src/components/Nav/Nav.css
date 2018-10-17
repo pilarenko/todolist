@@ -1,0 +1,12 @@
+.nav {
+  background-color: #ef5b09;
+}
+
+.nav a {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.nav i {
+  margin: 0px 5px;
+}
