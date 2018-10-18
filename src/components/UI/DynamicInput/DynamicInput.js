@@ -11,18 +11,19 @@ const DynamicInput = (props) => {
         placeholder="Add some text"
         onBlur={props.onBlur}
         onChange={props.onChange}
+        value={props.value}
       />
     </div>
   );
   
   if (props.transformed) {
-    classes = 'dynamicInput__transformed';
+    classes = 'dynamicInput dynamicInput__transformed';
     if (props.checked) {
-      classes = 'dynamicInput__checked dynamicInput__transformed';
+      classes = 'dynamicInput dynamicInput__checked dynamicInput__transformed';
     }
 
     dynamicInput = (
-      <div className={classes}>
+      <div className={classes} onClick={props.onClick}>
         {props.value}
       </div>
     )

@@ -6,10 +6,10 @@ import Can from '../UI/Can/Can';
 import './Actions.css';
 
 const Actions = (props) => {
-  let actions = <Button onClick={props.onClick}>Add</Button>;
+  let actions = <Button actions onClick={props.onClick}>Add</Button>;
   if (props.transformed) {
     actions = (
-      <div className='actions__set'>
+      <div className='actions actions__set'>
         <Check onClick={props.checkClick} active={props.checked} />
         <Can onClick={props.deleteClick} />
       </div>

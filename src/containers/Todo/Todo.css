@@ -1,0 +1,46 @@
+.todo {
+  margin: 60px auto;
+  width: 50%;
+}
+
+.todo__head {
+  background-color: #bcbcbc9c;
+}
+
+.todo__button {
+  width: 20%;
+  margin: 20px auto;
+}
+
+.todo__checkbox {
+  vertical-align: none;
+}
+
+@media (max-width: 768px) {
+  .todo {
+    width: 100%;
+    margin: 20px 0px;
+    padding: 0px 10px;
+  }
+
+  .todo__head {
+    font-size: 0.85rem;
+  }
+
+  .todo__date div div div div {
+    width: auto;
+  }
+
+  .todo__button {
+    width: 35%;
+    margin: 10px auto;
+  }
+
+  .todo th {
+    padding: .25rem !important;
+  }
+
+  .todo td {
+    padding: .25rem !important;
+  }
+}

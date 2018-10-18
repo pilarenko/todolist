@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import Todo from '../../components/Todo/Todo';
+import Todo from '../Todo/Todo';
 import './Layout.css';
 
 const Layout = (props) => {

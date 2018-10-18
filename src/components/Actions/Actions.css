@@ -1,5 +1,5 @@
 .actions {
-
+  vertical-align: middle;
 }
 
 .actions__set {
@@ -10,4 +10,11 @@
 .actions__set div:hover {
   color: #ef5b09;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+  }
 }

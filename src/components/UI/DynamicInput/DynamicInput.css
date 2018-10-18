@@ -1,7 +1,15 @@
+.dynamicInput {
+  cursor: pointer;
+}
+
 .dynamicInput input {
   text-align: center;
 }
 
 .dynamicInput__checked {
   text-decoration: line-through;
+}
+
+.dynamicInput__transformed {
+  vertical-align: middle;
 }

@@ -1,12 +1,15 @@
 .todo {
   margin: 60px auto;
-  width: 60%;
+  width: 70%;
 }
 
 .todo__head {
   background-color: #bcbcbc9c;
 }
 
+.todo__checkbox {
+  vertical-align: none;
+}
 
 @media (max-width: 768px) {
   .todo {

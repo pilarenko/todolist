@@ -3,3 +3,11 @@
   width: 18px;
   cursor: pointer;
 }
+
+.checkbox--hidden {
+  visibility: hidden;
+}
+
+.checkbox {
+  top: 50%;
+}

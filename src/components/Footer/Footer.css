@@ -8,3 +8,9 @@
   display: flex;
   padding: 10px 15px;
 }
+
+/* @media (max-height: 640px) {
+  .footer {
+    position: fixed;
+  }
+} */

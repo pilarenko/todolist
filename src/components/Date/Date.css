@@ -1,0 +1,27 @@
+.date input {
+  padding: 5.5px;
+  text-align: center;
+  border-radius: .25rem;
+  cursor: pointer;
+}
+
+.date--transformed div div {
+  border: none;
+}
+
+.date__transformed input:hover {
+  border: 1px solid black;
+}
+
+.date--odd input {
+  background-color: rgba(0,0,0,.05);
+}
+
+.date--even input {
+  background-color: #fff;
+}
+
+
+@media (max-width: 768px) {
+
+}
