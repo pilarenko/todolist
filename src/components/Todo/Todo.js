@@ -4,6 +4,7 @@ import Can from '../UI/Can/Can';
 import DynamicInput from '../UI/DynamicInput/DynamicInput';
 import Actions from '../../components/Actions/Actions';
 import Checkbox from '../UI/Checkbox/Checkbox';
+import Date from '../UI/Date/Date';
 
 
 import './Todo.css';
@@ -17,10 +18,11 @@ export default class Todo extends React.Component {
           transformed: false,
         },
         deadline: {
-          value: "Set deadline",
-          active: false,
+          value: null,
+          focused: false,
         },
         checked: false,
+        toDelete: false,
       },
     ]
   };
@@ -33,10 +35,11 @@ export default class Todo extends React.Component {
         transformed: false,
       },
       deadline: {
-        value: "Set deadline",
-        active: false,
+        value: null,
+        focused: false,
       },
       checked: false,
+      toDelete: false,
     };
 
     const tableState = [...this.state.table];
@@ -65,7 +68,6 @@ export default class Todo extends React.Component {
   deleteTableRowHandler = (event, index) => {
     const tableState = [...this.state.table];
     tableState.splice(index, 1);
-    console.table(tableState);
 
     this.setState({table: tableState});
   };
@@ -78,14 +80,35 @@ export default class Todo extends React.Component {
     this.setState({table: tableState});
   };
 
+  toDeleteHandler = (event, index) => {
+    const tableState = [...this.state.table];
+    const toDelete = !tableState[index].toDelete;
+    tableState[index].toDelete = toDelete;
+    this.setState({table: tableState});
+  };
+
+  deleteCheckedHandler = (event) => {
+    const tableState = [...this.state.table];
+
+    console.log(tableState);
+    const indexes = [];
+    for (let i = 0; i < tableState.length; i++) {
+      if (tableState[i].toDelete) {
+        indexes.push(i);
+        tableState.splice(i, 1);
+      }
+    }
+    this.setState({table: tableState});
+  }
+
   render() {
     const tableState = [...this.state.table];
     const tableContent = tableState.map((row, index) => (
       <tr className="todo__row" key={"row" + index}>
         <th scope="row">
           <Checkbox 
-            checked={row.checked}
-            onChange={(event) => this.checkTableHandler(event, index)}
+            checked={row.toDelete}
+            onChange={(event) => this.toDeleteHandler(event, index)}
           />
         </th>
         <td className="todo__content">
@@ -96,7 +119,12 @@ export default class Todo extends React.Component {
             checked={row.checked}
           />
         </td>
-        <td>{row.deadline.value}</td>
+        <td>
+          <Date 
+            transformed={row.content.transformed}
+            index={index}
+          />
+        </td>
         <td className="todo__actions">
           <Actions 
             onClick={(event) => this.populateTableHandler(event, index)}
@@ -111,10 +139,10 @@ export default class Todo extends React.Component {
 
     return (
       <div className='todo'>
-        <Table style={{"marginBottom": "0px"}} responsive striped>
+        <Table style={{"marginBottom": "0px"}} striped>
           <thead>
             <tr className="todo__head">
-              <th><Can /></th>
+              <th><Can onClick={this.deleteCheckedHandler} /></th>
               <th>Content</th>
               <th>Deadline</th>
               <th>Actions</th>

@@ -1,20 +1,15 @@
 .todo {
   margin: 60px auto;
-  width: 50%;
-  border: 1px solid black;
+  width: 60%;
 }
 
 .todo__head {
   background-color: #bcbcbc9c;
 }
 
-.todo__row {
-  background-color: #fcfcfc;
-}
-
 
 @media (max-width: 768px) {
   .todo {
-    width: 90%;
+    width: 100%;
   }
 }
