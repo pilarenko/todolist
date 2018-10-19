@@ -35,6 +35,7 @@ export default class Todo extends React.Component {
     page: 1,
     pages: null,
     error: false,
+    goBack: false,
   };
 
   componentDidMount() {
@@ -74,6 +75,7 @@ export default class Todo extends React.Component {
 
       );
       let currentTable = [...this.state.table];
+      const goBack = this.state.goBack;
       const cleanedNotes = [];
       newNotes.forEach(note => {
         if (note.deadline.value) {
@@ -81,12 +83,15 @@ export default class Todo extends React.Component {
         }
       });
 
-      if (page === 1) {
+      if ((page === 1) && (!goBack)) {
         cleanedNotes.forEach(note => {
           currentTable.unshift(note);
         })
       } else {
+        const lastElement = currentTable[currentTable.length - 1];
         currentTable = cleanedNotes;
+        currentTable.push(lastElement);
+        this.setState({goBack: false});
       }
 
 
@@ -248,6 +253,20 @@ export default class Todo extends React.Component {
     
   }
 
+  loadLessHandler = () => {
+    let prevPage = this.state.page;
+    
+    if (prevPage - 1 > 0) {
+      prevPage -= 1;
+      this.setState({
+        page: prevPage,
+        goBack: true,
+      });
+
+      this.loadNotes(prevPage);
+    }
+  }
+
   errorHandler() {
     this.setState({error: true});
     setTimeout(() => {
@@ -258,13 +277,14 @@ export default class Todo extends React.Component {
   render() {
     const styleAlign = {"verticalAlign": "middle"};
     const tableState = [...this.state.table];
+    let pagesButtons = [null, null];
     const tableContent = tableState.map((row, index) => {
-      let error = [null, null, null];
-      if (index === tableState.length - 1) {
-        error = [
-          <Error collapse={this.state.error} errorText={"Content can't be empty."} />, 
-          <Error collapse={this.state.error} empty errorText={""} />,
-        ];
+      const error = (index === tableState.length - 1) ? <Error collapse={this.state.error} errorText={"Content can't be empty."} /> : null;
+      const page = this.state.page;
+      if (page === 1) {
+        pagesButtons[0] = <Button key="loadMore" onClick={this.loadMoreHandler}>Load more</Button>;
+      } else {
+        pagesButtons = [<Button key="goBack" goBack onClick={this.loadLessHandler}>Go back</Button>, <Button key="loadMore" onClick={this.loadMoreHandler}>Load more</Button>];
       }
       return (
         <tr className="todo__row" key={"row" + index}>
@@ -283,7 +303,7 @@ export default class Todo extends React.Component {
               checked={row.checked}
               onClick={(event) => this.activateInputHandler(event, index)}
             />
-            {error[0]}
+            {error}
           </td>
           <td className="todo__date" style={styleAlign} >
             <DatePicker
@@ -324,7 +344,7 @@ export default class Todo extends React.Component {
           </tbody>
         </Table>
         <div className='todo__button'>
-          <Button onClick={this.loadMoreHandler}>Load more</Button>
+          {pagesButtons}
         </div>
       </div>
     );

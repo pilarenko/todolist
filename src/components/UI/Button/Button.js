@@ -7,6 +7,11 @@ const customButton = (props) => {
   if (props.actions) {
     classes = 'button button--actions';
   }
+
+  if (props.goBack) {
+    classes = 'button button--goBack';
+  };
+  
   return (
     <div className={classes}>
       <Button onClick={props.onClick}>{props.children}</Button>

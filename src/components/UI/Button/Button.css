@@ -1,7 +1,20 @@
+.button {
+  vertical-align: middle;
+  margin: 0px 4px;
+}
+
 .button button {
   background-color: #ef5b09;
   border: 1px solid #ef5b09;
+  margin: 4px;
 }
+
+.button--goBack button {
+  background-color: #e75152;
+  border: 1px solid #e75152;
+  margin: 4px;
+}
+
 
 @media (max-width: 768px) {
   .button button {

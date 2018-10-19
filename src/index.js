@@ -8,7 +8,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import axios from 'axios';
 
 axios.interceptors.request.use(request => {
-	console.log(request);
+	// console.log(request);
 	return request;
 }, error => {
 	console.log(error);
