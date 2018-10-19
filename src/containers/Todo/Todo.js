@@ -46,7 +46,6 @@ export default class Todo extends React.Component {
   loadNotes = (page) => {
     axios.get('/notes?page=' + page)
     .then(response => {
-      console.log(response);
       const notes = response.data.notes;
       const totalPages = response.data['total_pages'];
       const newNotes = notes.map((note) => {
@@ -124,9 +123,9 @@ export default class Todo extends React.Component {
     const currentTable = [...this.state.table];
     const inputValue = currentTable[index].content.value.length;
     const isEdited = currentTable[index].content.edited;
-    
+    currentTable[currentTable.length - 1].showCheckbox = true;
+
     if (index === 0) {
-      currentTable[0].showCheckbox = true;
       currentTable[0].created = new Date();
     }
 
@@ -250,7 +249,6 @@ export default class Todo extends React.Component {
       this.loadNotes(nextPage);
       this.setState({page: nextPage});
     }
-    
   }
 
   loadLessHandler = () => {
