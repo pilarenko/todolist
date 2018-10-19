@@ -23,7 +23,7 @@ axios.interceptors.response.use(response => {
 	return Promise.reject(error);
 });
 
-axios.defaults.baseURL = 'http://useo-notes.herokuapp.com/';
+axios.defaults.baseURL = '//useo-notes.herokuapp.com/';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
