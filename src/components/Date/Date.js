@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import './Date.css';

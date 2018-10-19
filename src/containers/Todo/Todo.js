@@ -6,6 +6,7 @@ import Actions from '../../components/Actions/Actions';
 import Checkbox from '../../components/UI/Checkbox/Checkbox';
 import DatePicker from '../../components/Date/Date';
 import Button from '../../components/UI/Button/Button';
+import Error from '../../components/UI/Error/Error';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -33,6 +34,7 @@ export default class Todo extends React.Component {
     ],
     page: 1,
     pages: null,
+    error: false,
   };
 
   componentDidMount() {
@@ -145,7 +147,7 @@ export default class Todo extends React.Component {
 
 
     } else {
-      console.log("Nie dla pustej notatki");
+      this.errorHandler();
     }
 
   };
@@ -246,48 +248,65 @@ export default class Todo extends React.Component {
     
   }
 
+  errorHandler() {
+    this.setState({error: true});
+    setTimeout(() => {
+      this.setState({error: false});
+    }, 3000);
+  }
+
   render() {
     const styleAlign = {"verticalAlign": "middle"};
     const tableState = [...this.state.table];
-    const tableContent = tableState.map((row, index) => (
-      <tr className="todo__row" key={"row" + index}>
-        <th style={styleAlign} scope="row">
-          <Checkbox 
-            checked={row.toDelete}
-            onChange={(event) => this.toDeleteHandler(event, index)}
-            show={row.showCheckbox}
-          />
-        </th>
-        <td className="todo__content" style={styleAlign} >
-          <DynamicInput 
-            value={row.content.value} 
-            transformed={row.content.transformed}
-            onChange={(event) => this.inputChangeHandler(event, index)}
-            checked={row.checked}
-            onClick={(event) => this.activateInputHandler(event, index)}
-          />
-        </td>
-        <td className="todo__date" style={styleAlign} >
-          <DatePicker
-            date={row.deadline.value}
-            focused={row.deadline.focused} 
-            transformed={row.content.transformed}
-            index={index}
-            onDateChange={(date) => this.dateChangeHandler(date, index)}
-            onFocusChange={(focus) => this.focusChangeHandler(focus, index)}
-          />
-        </td>
-        <td className="todo__actions" style={styleAlign}>
-          <Actions 
-            onClick={(event) => this.populateTableHandler(event, index)}
-            transformed={row.content.transformed}
-            checked={row.checked}
-            deleteClick={(event) => this.deleteTableRowHandler(event, index)}
-            checkClick={(event) => this.checkTableHandler(event, index)}
-          />
-        </td>
-      </tr>
-    ));
+    const tableContent = tableState.map((row, index) => {
+      let error = [null, null, null];
+      if (index === tableState.length - 1) {
+        error = [
+          <Error collapse={this.state.error} errorText={"Content can't be empty."} />, 
+          <Error collapse={this.state.error} empty errorText={""} />,
+        ];
+      }
+      return (
+        <tr className="todo__row" key={"row" + index}>
+          <th style={styleAlign} scope="row">
+            <Checkbox 
+              checked={row.toDelete}
+              onChange={(event) => this.toDeleteHandler(event, index)}
+              show={row.showCheckbox}
+            />
+          </th>
+          <td className="todo__content" style={styleAlign} >
+            <DynamicInput 
+              value={row.content.value} 
+              transformed={row.content.transformed}
+              onChange={(event) => this.inputChangeHandler(event, index)}
+              checked={row.checked}
+              onClick={(event) => this.activateInputHandler(event, index)}
+            />
+            {error[0]}
+          </td>
+          <td className="todo__date" style={styleAlign} >
+            <DatePicker
+              date={row.deadline.value}
+              focused={row.deadline.focused} 
+              transformed={row.content.transformed}
+              index={index}
+              onDateChange={(date) => this.dateChangeHandler(date, index)}
+              onFocusChange={(focus) => this.focusChangeHandler(focus, index)}
+            />
+          </td>
+          <td className="todo__actions" style={styleAlign}>
+            <Actions 
+              onClick={(event) => this.populateTableHandler(event, index)}
+              transformed={row.content.transformed}
+              checked={row.checked}
+              deleteClick={(event) => this.deleteTableRowHandler(event, index)}
+              checkClick={(event) => this.checkTableHandler(event, index)}
+            />
+          </td>
+        </tr>
+      )
+    });
 
     return (
       <div className='todo'>
