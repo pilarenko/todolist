@@ -1,6 +1,5 @@
 .footer {
   background-color: #e3e3e3;
-  clear: both;
   color: #524f4f;
   position: absolute;
   right: 0;
@@ -10,8 +9,8 @@
   padding: 10px 15px;
 }
 
-@media (max-height: 630px) {
+/* @media (max-height: 650px) {
   .footer {
     position: inherit;
   }
-} 
+}  */
