@@ -93,7 +93,6 @@ export default class Todo extends React.Component {
         this.setState({goBack: false});
       }
 
-
       this.setState({
         table: currentTable,
         pages: totalPages,
@@ -149,7 +148,6 @@ export default class Todo extends React.Component {
         this.setState({table: currentTable});
       });
 
-
     } else {
       this.errorHandler();
     }
@@ -172,13 +170,11 @@ export default class Todo extends React.Component {
 
   deleteTableRowHandler = (event, index) => {
     const tableState = [...this.state.table];
-    console.log(tableState[index]);
     const id = tableState[index].id;
 
     axios.delete('/notes/' + id)
     .then(response => {
       tableState.splice(index, 1);
-      console.log(response);
       this.setState({table: tableState});
     });
 
@@ -193,7 +189,6 @@ export default class Todo extends React.Component {
 
     axios.put('/notes/' + id + completion)
     .then(response => {
-      console.log(response);
     });
 
     this.setState({table: tableState});
@@ -220,7 +215,6 @@ export default class Todo extends React.Component {
     indexes.forEach(index => {
       axios.delete('/notes/' + index)
       .then(response => {
-        console.log(response);
       });
     });
 
